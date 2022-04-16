@@ -1,0 +1,53 @@
+server:
+  port: 8080
+
+spring:
+  freemarker:
+    check-template-location: false
+  profiles:
+    active: dev
+  jackson:
+    time-zone: GMT+8
+  data:
+    redis:
+      repositories:
+        enabled: false
+
+task:
+  pool:
+    # 核心线程池大小
+    core-pool-size: 10
+    # 最大线程数
+    max-pool-size: 30
+    # 活跃时间
+    keep-alive-seconds: 60
+    # 队列容量
+    queue-capacity: 50
+
+#登录图形验证码有效时间/分钟
+loginCode:
+  expiration: 2
+
+#密码加密传输，前端公钥加密，后端私钥解密
+rsa:
+  private_key: MIIBVQIBADANBgkqhkiG9w0BAQEFAASCAT8wggE7AgEAAkEAtrLIyngMNAZt3hXzuERThBHwD4Ot8+C0hx0prRRm87GNMkYgY75VpsG181bzOWcsE2gkkeAj1O7DqGjIk92DIwIDAQABAkEAsbHGNZb5V4iBR6ZWO/zItgW0VYKfqDn/nAKzTFIxqAZ8lEQKdIhLEtHSj93DSUB+HPsBbbc9HniD2k1tbc2E4QIhAOxOWZhK2MN87+OOlxiTGJkwkEEjZduOh34iLijmFFbrAiEAxeyzayNiUL5BIQgkjzi0u216SyBusDDrEthCMPrL5qkCIGzZOlP4RhjmN+nuCJN9TltiD1Cx6X1VDfx/6htUwBG5AiAFQHmmTyMNt26s/LVTo5KQIqCLG8o0HKgwMNLYz97XOQIhAOF1iIvPZjVxVNk+QbMhkMS7t/8UT85KxByjW7z9WzOQ
+#单用户登录
+single:
+  login: true
+#日志级别配置
+logging:
+  level:
+    com.xiaoxiao: DEBUG
+    org.springframework.web: ERROR
+
+mybatis-plus:
+  check-config-location: true
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: isDel # 全局逻辑删除的实体字段名，也可实体类字段上加上@TableLogic注解
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      mapper-locations: classpath*:mapper/**/*Mapper.xml
